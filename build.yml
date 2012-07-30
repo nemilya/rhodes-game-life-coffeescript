@@ -1,0 +1,24 @@
+#sdk: "c:/ruby187/lib/ruby/gems/1.8/gems/rhodes-3.3.3"
+sdkversion: 3.3.3
+name: rhodes-game-life
+version: 1.0
+vendor: rhomobile
+build: debug
+bbver: 4.6
+applog: rholog.txt
+iphone:
+  configuration: Release
+  sdk: iphonesimulator5.0
+  provisionprofile:
+  codesignidentity:
+  entitlements:
+  BundleIdentifier: com.rhomobile.rhodes-game-life
+  BundleURLScheme: rhodes-game-life
+wp:
+  productid: '22e2a1d0-bc5f-012f-d6e0-0007e9884d1f'
+symbian:
+  uid: '0xe8c018d0'
+android:
+  version: 2.1
+
+extensions: ["json", "another-extension"]
