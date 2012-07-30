@@ -9,7 +9,7 @@ https://github.com/nemilya/coffeescript-game-life
 
 Методы прописаны в `public/js/application.js`:
 
-```html
+```javascript
   var game = new GameLife({empty_cell:'.', live_cell:'*'});
   var generation = 0;
   var start = false;
