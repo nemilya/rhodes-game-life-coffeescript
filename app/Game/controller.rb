@@ -7,6 +7,7 @@ class GameController < Rho::RhoController
   include BrowserHelper
   
   def index
+    @game = true
   end
 
 end
