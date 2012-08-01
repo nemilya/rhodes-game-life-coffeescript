@@ -122,4 +122,4 @@ https://s3.amazonaws.com/rhohub-prod-builds/760c9de6d060464face1990df9da41ba.zip
 
 Скриншот в эмуляторе:
 
-<img scr="https://github.com/nemilya/rhodes-game-life-coffeescript/raw/master/screenshot.png">
+<img src="https://github.com/nemilya/rhodes-game-life-coffeescript/raw/master/screenshot.png">
