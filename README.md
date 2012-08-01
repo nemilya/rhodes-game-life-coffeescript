@@ -1,58 +1,63 @@
 Игра Жизнь на базе фреймворка Rhodes
 ====================================
 
-Пример JavaScript производительности.
+Пример `JavaScript` производительности, на базе `CoffeeScript` кода.
 
-Алгоритм Игры Жизнь (класс) `public/js/game_life.js` взято из проекта
+Алгоритм Игры Жизнь (класс) `public/coffee/game_life.coffee` взят из проекта
 https://github.com/nemilya/coffeescript-game-life 
-(алгоритм реализован на CoffeeScript скомпилирован в JS)
 
-Методы прописаны в `public/js/application.js`:
+Методы прописаны в `public/coffee/application.coffee`:
 
-```javascript
-  var game = new GameLife({empty_cell:'.', live_cell:'*'});
-  var generation = 0;
-  var start = false;
+```coffeescript
+game = new GameLife({empty_cell:'.', live_cell:'*'})
+generation_number = 1
+nonstop = false
 
-  function do_step(){
-    game.set_generation($('#generation').html());
-    game.do_step();
+this.do_step =->
+  game.set_generation($('#generation').html())
+  game.do_step()
 
-    generation += 1;
-    show_generation();
-    new_generation = game.screen();
-    $('#generation').html(new_generation);
+  generation_number += 1
+  show_generation_number(generation_number)
 
-    if (start) {
-      setTimeout(do_step, 100);
-    }
-  }
+  new_generation = game.screen()
+  $('#generation').html(new_generation)
 
-  function do_start(){
-    start = true;
-    do_step();
-  }
+  setTimeout(do_step, 100) if nonstop
 
-  function do_stop(){
-    start = false;
-  }
+this.do_start =->
+  nonstop = true
+  do_step()
 
-  function show_generation(){
-    var generation_num = document.getElementById('generation_num');
-    generation_num.innerHTML = generation;
-  }
+this.do_stop =->
+  nonstop = false
+
+this.show_generation_number = (number) ->
+  $('#generation_num').html(number)
 ```
 
 
-Библиотека и `application.js` загружаются в `app/layout.erb`
+
+
+Класс `game_life.coffee` и методы `application.coffee` загружаются в `app/layout.erb`
 
 ```html
-<script src="/public/js/game_life.js" type="text/javascript"></script>
-<script src="/public/js/application.js" type="text/javascript"></script>
+<script src="/public/coffee/game_life.coffee" type="text/coffeescript"></script>
+<script src="/public/coffee/application.coffee" type="text/coffeescript"></script>
 ```
 
+Обратим внимание на `type="text/coffeescript"`.
 
-Контроллер обрабатывает '/app/Game':
+Предварительно загружается сохранённый локально компилятор `CoffeeScript` 
+(согласно http://coffeescript.org/#scripts):
+
+```html
+<script src="/public/js/coffee-script.js" type="text/javascript"></script>
+```
+
+После загрузки - он обрабатывает все `type="text/coffeescript"`.
+
+Rhodes контроллер обрабатывает '/app/Game':
 
 ```ruby
 require 'rho'
@@ -75,11 +80,10 @@ end
 <div data-role="page">
 
   <div data-role="header" data-position="inline">
-    <h1>Game LIFE</h1>
+    <h1>GameLife | CoffeeScript</h1>
   </div>
 
   <div data-role="content">
-
 
 Generation: <span id="generation_num"></span>
 <pre id="generation" style="font-family: Courier;">
@@ -110,6 +114,12 @@ Generation: <span id="generation_num"></span>
 ```
 
 
-
 Сборка Android 4.0:
-https://s3.amazonaws.com/rhohub-prod-builds/70a95627e14e410b98b2b2b928d36a87.zip 
+https://s3.amazonaws.com/rhohub-prod-builds/760c9de6d060464face1990df9da41ba.zip
+
+Проверено на "sony ericsson xperia ray", время запуска приложения около 5 секунд.
+
+
+Скриншот в эмуляторе:
+
+<img scr="https://github.com/nemilya/rhodes-game-life-coffeescript/raw/master/screenshot.png">
